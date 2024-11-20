@@ -1,14 +1,14 @@
 """Stream type classes for tap-sendbird."""
 from __future__ import annotations
 
-import datetime
+import os
+
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-from typing import Any, Dict, Iterable, Optional
+from typing import Any, Optional
+
 
 import requests
-from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_sendbird.client import SendBirdStream
@@ -23,14 +23,14 @@ class UsersStream(SendBirdStream):
     path = "/users"
     primary_keys = ["user_id"]
     records_jsonpath = "$.users[*]"
-    schema_filepath = "tap_sendbird/schemas/users.json"
+    schema_filepath = f"{os.path.dirname(os.path.abspath(__file__))}/schemas/users.json"
 
 class GroupChannelsStream(SendBirdStream):
     name = "group_channels"
     path = "/group_channels"
     primary_keys = ["channel_url"]
     records_jsonpath = "$.channels[*]"
-    schema_filepath = "tap_sendbird/schemas/group_channels.json"
+    schema_filepath = f"{os.path.dirname(os.path.abspath(__file__))}/schemas/group_channels.json"
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
@@ -67,7 +67,7 @@ class MessagesStream(SendBirdStream):
     primary_keys = ["message_id"]
     records_jsonpath = "$.messages[*]"
     replication_key = "created_at"
-    schema_filepath = "tap_sendbird/schemas/messages.json"
+    schema_filepath = f"{os.path.dirname(os.path.abspath(__file__))}/schemas/messages.json"
 
     max_records_per_page_limit = 200
 
@@ -104,7 +104,7 @@ class MessagesStream(SendBirdStream):
                 self.query_stream = False
 
         next_page_token = convert_ts_to_milliseconds(next_page_token)
-        self.logger.info("NEXT PAGE TOKEN: {}".format(next_page_token))
+        self.logger.info("Next Page Token: {}".format(next_page_token))
 
         url_params: dict[str, Any] = {
             "prev_limit": 0,
