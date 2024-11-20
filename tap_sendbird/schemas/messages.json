@@ -1,0 +1,123 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "message_id": { "type": "integer" },
+      "type": { "type": ["string", "null"] },
+      "custom_type": { "type": ["string", "null"] },
+      "channel_url": { "type": ["string", "null"] },
+      "user": {
+        "type": ["object", "null"],
+        "properties": {
+          "user_id": { "type": ["string", "null"] },
+          "nickname": { "type": ["string", "null"] },
+          "profile_url": { "type": ["string", "null"] },
+          "metadata": {
+            "type": ["object", "null"],
+            "properties": {
+              "font_preference": { "type": ["string", "null"] },
+              "font_color": { "type": ["string", "null"] }
+            }
+          }
+        }
+      },
+      "mention_type": { "type": ["string", "null"] },
+      "mentioned_users": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "object",
+          "properties": {
+            "user_id": { "type": ["string", "null"] },
+            "nickname": { "type": ["string", "null"] },
+            "profile_url": { "type": ["string", "null"] },
+            "metadata": {
+              "type": ["object", "null"],
+              "properties": {
+                "font_preference": { "type": ["string", "null"] },
+                "font_color": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      },
+      "is_removed": { "type": ["boolean", "null"] },
+      "message": { "type": ["string", "null"] },
+      "translations": { "type": ["object", "null"] },
+      "data": { "type": ["string", "null"] },
+      "sorted_metaarray": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": { "type": ["string", "null"] },
+            "value": {
+              "type": ["array", "null"],
+              "items": { "type": ["string", "null"] }
+            }
+          }
+        }
+      },
+      "og_tag": {
+        "type": ["object", "null"],
+        "properties": {
+          "og:url": { "type": ["string", "null"] },
+          "og:title": { "type": ["string", "null"] },
+          "og:description": { "type": ["string", "null"] },
+          "og:image": {
+            "type": ["object", "null"],
+            "properties": {
+              "url": { "type": ["string", "null"] },
+              "secure_url": { "type": ["string", "null"] },
+              "width": { "type": ["integer", "null"] },
+              "height": { "type": ["integer", "null"] }
+            }
+          }
+        }
+      },
+      "poll": {
+        "type": ["object", "null"],
+        "properties": {
+          "id": { "type": ["integer", "null"] },
+          "title": { "type": ["string", "null"] },
+          "status": { "type": ["string", "null"] },
+          "allow_user_suggestion": { "type": ["boolean", "null"] },
+          "data": { "type": ["string", "null"] },
+          "allow_multiple_votes": { "type": ["boolean", "null"] },
+          "created_at": { "type": ["integer", "null"] },
+          "updated_at": { "type": ["integer", "null"] },
+          "created_by": { "type": ["string", "null"] },
+          "voter_count": { "type": ["integer", "null"] },
+          "close_at": { "type": ["integer", "null"] },
+          "options": {
+            "type": ["array", "null"],
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": { "type": ["string", "null"] },
+                "created_at": { "type": ["integer", "null"] },
+                "updated_at": { "type": ["integer", "null"] },
+                "created_by": { "type": ["string", "null"] },
+                "vote_count": { "type": ["integer", "null"] },
+                "poll_id": { "type": ["integer", "null"] },
+                "id": { "type": ["integer", "null"] }
+              }
+            }
+          }
+        }
+      },
+      "message_events": {
+        "type": ["object", "null"],
+        "properties": {
+          "send_push_notification": { "type": ["string", "null"] },
+          "update_unread_count": { "type": ["boolean", "null"] },
+          "update_mention_count": { "type": ["boolean", "null"] },
+          "update_last_message": { "type": ["boolean", "null"] }
+        }
+      },
+      "created_at": { "type": ["integer", "null"] },
+      "updated_at": { "type": ["integer", "null"] },
+      "file": { "type": ["object", "null"] }
+    },
+    "additionalProperties": false
+  }
+  

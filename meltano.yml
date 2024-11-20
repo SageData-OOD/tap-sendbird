@@ -1,0 +1,37 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: tap-sendbird
+plugins:
+  extractors:
+  - name: tap-sendbird
+    executable: tap-sendbird
+    settings:
+      - name: project_id
+      - name: dataset_id
+      - name: table_id  
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
+default_environment: dev
+environments:
+  - name: dev
+    config:
+      plugins:
+        extractors:
+        - name: tap-sendbird
+          config: {
+            "app_id": "E6A3D70B-718D-4E1F-89BF-90A75205E990",
+            "api_token": "3f33913a1a90f0a4c35c73ce60548486ef1b7573",
+            "start_date": "2024-11-01"
+          }
+          namespace: tap_sendbird
+          executable: ./tap-sendbird.sh
+          capabilities:
+          - state
+          - catalog
+          - discover
+          settings:
+          - name: app_id
+          - name: app_token
+          - name: start_date
