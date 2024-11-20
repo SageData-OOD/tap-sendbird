@@ -3,8 +3,6 @@ from __future__ import annotations
 
 import os
 
-from urllib.parse import urlparse
-from urllib.parse import parse_qs
 from typing import Any, Optional
 
 
@@ -71,9 +69,9 @@ class MessagesStream(SendBirdStream):
 
     max_records_per_page_limit = 200
 
-    def __init__(self, tap, name=None, schema=None, path=None):
-        super().__init__(tap, name, schema, path)
-        self.query_stream = True
+    # def __init__(self, tap, name=None, schema=None, path=None):
+    #     super().__init__(tap, name, schema, path)
+    #     self.query_stream = True
 
     # def get_records(self, context: dict | None) -> Iterable[dict[str, Any]]:
     #     """Return a generator of record-type dictionary objects.
@@ -100,8 +98,8 @@ class MessagesStream(SendBirdStream):
         if not next_page_token:
             next_page_token = convert_ts_to_milliseconds(self.get_starting_replication_key_value(context))
             
-            if next_page_token > context["last_message_ts"]:
-                self.query_stream = False
+            # if next_page_token > context["last_message_ts"]:
+            #     self.query_stream = False
 
         next_page_token = convert_ts_to_milliseconds(next_page_token)
         self.logger.info("Next Page Token: {}".format(next_page_token))
