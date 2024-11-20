@@ -3,39 +3,39 @@
     "type": "object",
     "properties": {
         "is_distinct": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether the channel is distinct."
         },
         "is_public": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether the channel is public."
         },
         "is_super": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether the channel is a supergroup channel."
         },
         "is_ephemeral": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether the channel is ephemeral."
         },
         "is_access_code_required": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether an access code is required to join the channel."
         },
         "freeze": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "description": "Indicates whether the channel is frozen."
         },
         "max_length_message": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "description": "The maximum length allowed for messages in this channel."
         },
         "custom_type": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "A custom type for categorizing the channel."
         },
         "name": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The name of the group channel."
         },
         "channel_url": {
@@ -43,262 +43,218 @@
             "description": "The unique URL identifier for the group channel."
         },
         "created_at": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "format": "int64",
             "description": "The timestamp of when the channel was created, in milliseconds since epoch."
         },
         "created_by": {
-            "type": "object",
+            "type": ["object", "null"],
             "description": "Details about the user who created the channel.",
             "properties": {
                 "user_id": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "nickname": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "profile_url": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "require_auth_for_profile_image": {
-                    "type": "boolean"
+                    "type": ["boolean", "null"]
                 }
             },
-            "required": [
-                "user_id"
-            ]
+            "required": ["user_id"]
         },
         "cover_url": {
-            "type": [
-                "string",
-                "null"
-            ],
+            "type": ["string", "null"],
             "description": "The URL of the group's cover image."
         },
         "data": {
-            "type": [
-                "string",
-                "null"
-            ],
+            "type": ["string", "null"],
             "description": "Custom data for the channel, typically in JSON format."
         },
         "member_count": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "description": "The total number of members in the group channel."
         },
         "joined_member_count": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "description": "The number of members currently joined in the channel."
         },
         "members": {
-            "type": "array",
+            "type": ["array", "null"],
             "description": "Details about the members of the channel.",
             "items": {
                 "type": "object",
                 "properties": {
                     "user_id": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "nickname": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "profile_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": ["string", "null"]
                     },
                     "is_active": {
-                        "type": "boolean"
+                        "type": ["boolean", "null"]
                     },
                     "is_online": {
-                        "type": "boolean"
+                        "type": ["boolean", "null"]
                     },
                     "last_seen_at": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": ["integer", "null"],
                         "format": "int64"
                     },
                     "state": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "role": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": ["string", "null"],
                         "description": "Either 'operator' or null."
                     },
                     "metadata": {
-                        "type": "object",
+                        "type": ["object", "null"],
                         "additionalProperties": {
-                            "type": "string"
+                            "type": ["string", "null"]
                         }
                     }
                 },
-                "required": [
-                    "user_id",
-                    "nickname",
-                    "state"
-                ]
+                "required": ["user_id", "nickname", "state"]
             }
         },
         "delivery_receipt": {
-            "type": "object",
+            "type": ["object", "null"],
             "description": "A mapping of user IDs to their message delivery timestamps.",
             "additionalProperties": {
-                "type": "integer",
+                "type": ["integer", "null"],
                 "format": "int64"
             }
         },
         "read_receipt": {
-            "type": "object",
+            "type": ["object", "null"],
             "description": "A mapping of user IDs to their message read timestamps.",
             "additionalProperties": {
-                "type": "integer",
+                "type": ["integer", "null"],
                 "format": "int64"
             }
         },
         "last_message": {
-            "type": [
-                "object",
-                "null"
-            ],
+            "type": ["object", "null"],
             "description": "Details of the most recent message in the channel.",
             "properties": {
                 "message_id": {
-                    "type": "integer"
+                    "type": ["integer", "null"]
                 },
                 "type": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "custom_type": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "mention_type": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "mentioned_users": {
-                    "type": "array",
+                    "type": ["array", "null"],
                     "items": {
-                        "type": "object"
+                        "type": ["object", "null"]
                     }
                 },
                 "created_at": {
-                    "type": "integer",
+                    "type": ["integer", "null"],
                     "format": "int64"
                 },
                 "updated_at": {
-                    "type": "integer",
+                    "type": ["integer", "null"],
                     "format": "int64"
                 },
                 "is_removed": {
-                    "type": "boolean"
+                    "type": ["boolean", "null"]
                 },
                 "channel_url": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "user": {
-                    "type": [
-                        "object",
-                        "null"
-                    ],
+                    "type": ["object", "null"],
                     "properties": {
                         "user_id": {
-                            "type": "string"
+                            "type": ["string", "null"]
                         },
                         "nickname": {
-                            "type": "string"
+                            "type": ["string", "null"]
                         },
                         "profile_url": {
-                            "type": "string"
+                            "type": ["string", "null"]
                         },
                         "metadata": {
-                            "type": "object",
+                            "type": ["object", "null"],
                             "additionalProperties": {
-                                "type": "string"
+                                "type": ["string", "null"]
                             }
                         }
                     },
-                    "required": [
-                        "user_id"
-                    ]
+                    "required": ["user_id"]
                 },
                 "message": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "translations": {
-                    "type": "object"
+                    "type": ["object", "null"]
                 },
                 "data": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "file": {
-                    "type": "object"
+                    "type": ["object", "null"]
                 }
             },
-            "required": [
-                "message_id",
-                "type",
-                "created_at"
-            ]
+            "required": ["message_id", "type", "created_at"]
         },
         "invited_at": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "format": "int64",
             "description": "The timestamp of when the invitation was sent."
         },
         "inviter": {
-            "type": [
-                "object",
-                "null"
-            ],
+            "type": ["object", "null"],
             "description": "Details about the user who invited others to the channel.",
             "properties": {
                 "user_id": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "nickname": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "profile_url": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "metadata": {
-                    "type": "object",
+                    "type": ["object", "null"],
                     "additionalProperties": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     }
                 }
             },
-            "required": [
-                "user_id"
-            ]
+            "required": ["user_id"]
         },
         "unread_message_count": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "description": "The number of unread messages in the channel."
         },
         "unread_mention_count": {
-            "type": "integer",
+            "type": ["integer", "null"],
             "description": "The number of unread mentions in the channel."
         },
         "metadata": {
-            "type": "object",
+            "type": ["object", "null"],
             "additionalProperties": {
-                "type": "string"
+                "type": ["string", "null"]
             },
             "description": "Custom metadata associated with the group channel."
         }
     },
-    "required": [
-        "channel_url",
-        "created_at",
-        "member_count",
-        "is_distinct",
-        "last_message"
-    ],
+    "required": ["channel_url", "created_at", "member_count", "is_distinct"],
     "additionalProperties": true
 }
