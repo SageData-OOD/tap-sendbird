@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import os
 
-from typing import Any, Optional
+from typing import Any, Optional, Iterable
 
 
 import requests
@@ -35,7 +35,7 @@ class GroupChannelsStream(SendBirdStream):
         return {
             "channel_type": "group_channel",
             "channel_url": record["channel_url"],
-            "last_message_ts": str((record.get("last_message", {}) or {}).get("created_at", 0))
+            "last_message_ts": str((record.get("last_message", {"created_at" : -1}) or {"created_at" : -1}).get("created_at"))
         }
     
     def get_url_params(
@@ -69,26 +69,26 @@ class MessagesStream(SendBirdStream):
 
     max_records_per_page_limit = 200
 
-    # def __init__(self, tap, name=None, schema=None, path=None):
-    #     super().__init__(tap, name, schema, path)
-    #     self.query_stream = True
+    def __init__(self, tap, name=None, schema=None, path=None):
+        super().__init__(tap, name, schema, path)
+        self.query_stream = True
 
-    # def get_records(self, context: dict | None) -> Iterable[dict[str, Any]]:
-    #     """Return a generator of record-type dictionary objects.
+    def get_records(self, context: dict | None) -> Iterable[dict[str, Any]]:
+        """Return a generator of record-type dictionary objects.
 
-    #     Each record emitted should be a dictionary of property names to their values.
+        Each record emitted should be a dictionary of property names to their values.
 
-    #     Args:
-    #         context: Stream partition or context dictionary.
+        Args:
+            context: Stream partition or context dictionary.
 
-    #     Yields:
-    #         One item per (possibly processed) record in the API.
-    #     """
-    #     if self.query_stream:
-    #         for record in super().get_records(context):
-    #             yield record
-    #     else:
-    #         self.logger.info("Skipping channel sync due to ".format(context))
+        Yields:
+            One item per (possibly processed) record in the API.
+        """
+        if self.query_stream:
+            for record in super().get_records(context):
+                yield record
+        else:
+            self.logger.info("Skipping channel sync. Latest message in channel is older than current sync bookmark ".format(context))
 
     def get_url_params(
         self, context: dict, next_page_token=None
@@ -98,8 +98,8 @@ class MessagesStream(SendBirdStream):
         if not next_page_token:
             next_page_token = convert_ts_to_milliseconds(self.get_starting_replication_key_value(context))
             
-            # if next_page_token > context["last_message_ts"]:
-            #     self.query_stream = False
+            if context["last_message_ts"] != "-1" and next_page_token > context["last_message_ts"]:
+                self.query_stream = False
 
         next_page_token = convert_ts_to_milliseconds(next_page_token)
         self.logger.info("Next Page Token: {}".format(next_page_token))
