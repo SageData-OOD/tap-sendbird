@@ -127,7 +127,7 @@ class MessagesStream(SendBirdStream):
         
         """Return URL params that go with the request."""
         if not next_page_token:
-            next_page_token = convert_ts_to_milliseconds_string(self.get_starting_replication_key_value(context))
+            next_page_token = self.config["start_date"]
             
             if context["last_message_ts"] != "-1" and next_page_token > context["last_message_ts"]:
                 self.query_stream = False
