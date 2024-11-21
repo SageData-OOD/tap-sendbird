@@ -198,4 +198,4 @@ class MessagesStream(SendBirdStream):
             # cut off messages longer than 4k in the response
             row["message"] =  msg[:4096]
 
-        return convert_metadata_to_json_string(row)
+        return row
