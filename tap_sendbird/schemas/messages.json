@@ -115,7 +115,7 @@
         }
       },
       "created_at": { "type": ["integer", "null"] },
-      "updated_at": { "type": ["integer", "null"] },
+      "updated_at": { "type": ["integer", "null"] }
     },
     "additionalProperties": false
   }
