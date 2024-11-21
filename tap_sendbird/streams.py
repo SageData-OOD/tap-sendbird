@@ -10,7 +10,7 @@ import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_sendbird.client import SendBirdStream
-from utils import convert_metadata_to_json_string, convert_ts_to_milliseconds_string
+from tap_sendbird.utils import convert_metadata_to_json_string, convert_ts_to_milliseconds_string
 
 
 class UsersStream(SendBirdStream):
