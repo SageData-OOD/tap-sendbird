@@ -12,11 +12,10 @@ from tap_sendbird.streams import (
 )
 
 STREAM_TYPES = [
-    # UsersStream,
+    UsersStream,
     GroupChannelsStream,
     MessagesStream
 ]
-
 
 class TapSendBird(Tap):
     name = "tap-sendbird"

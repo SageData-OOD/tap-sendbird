@@ -115,10 +115,7 @@
                         "description": "Either 'operator' or null."
                     },
                     "metadata": {
-                        "type": ["object", "null"],
-                        "additionalProperties": {
-                            "type": ["string", "null"]
-                        }
+                        "type": ["string", "null"]
                     }
                 },
                 "required": ["user_id", "nickname", "state"]
@@ -189,10 +186,7 @@
                             "type": ["string", "null"]
                         },
                         "metadata": {
-                            "type": ["object", "null"],
-                            "additionalProperties": {
-                                "type": ["string", "null"]
-                            }
+                            "type": ["string", "null"]
                         }
                     },
                     "required": ["user_id"]
@@ -231,10 +225,7 @@
                     "type": ["string", "null"]
                 },
                 "metadata": {
-                    "type": ["object", "null"],
-                    "additionalProperties": {
-                        "type": ["string", "null"]
-                    }
+                    "type": ["string", "null"]
                 }
             },
             "required": ["user_id"]
@@ -248,10 +239,7 @@
             "description": "The number of unread mentions in the channel."
         },
         "metadata": {
-            "type": ["object", "null"],
-            "additionalProperties": {
-                "type": ["string", "null"]
-            },
+            "type": ["string", "null"],
             "description": "Custom metadata associated with the group channel."
         }
     },
