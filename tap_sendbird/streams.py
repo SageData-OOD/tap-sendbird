@@ -50,10 +50,12 @@ class GroupChannelsStream(SendBirdStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
+        provisional_last_message = {"created_at" : -1}
         return {
             "channel_type": "group_channel",
             "channel_url": record["channel_url"],
-            "last_message_ts": str((record.get("last_message", {"created_at" : -1}) or {"created_at" : -1}).get("created_at"))
+            # For maximum accuracy, updated_at should also be handled but I don't care about it now
+            "last_message_ts": str((record.get("last_message", provisional_last_message) or provisional_last_message).get("created_at"))
         }
     
     def get_url_params(
@@ -172,3 +174,28 @@ class MessagesStream(SendBirdStream):
         # there could be unlimited number of group channels which would explode the state
         # hence partitioning gets disabled by returning an empty list
         return []
+    
+    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+        """As needed, append or transform raw data to match expected structure.
+
+        Optional. This method gives developers an opportunity to "clean up" the results
+        prior to returning records to the downstream tap - for instance: cleaning,
+        renaming, or appending properties to the raw record result returned from the
+        API.
+
+        Developers may also return `None` from this method to filter out
+        invalid or not-applicable records from the stream.
+
+        Args:
+            row: Individual record in the stream.
+            context: Stream partition or context dictionary.
+
+        Returns:
+            The resulting record dict, or `None` if the record should be excluded.
+        """
+        msg = row.get("message")
+        if msg:
+            # cut off messages longer than 4k in the response
+            row["message"] =  msg[:4096]
+
+        return convert_metadata_to_json_string(row)
